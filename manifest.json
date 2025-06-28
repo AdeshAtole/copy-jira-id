@@ -1,13 +1,14 @@
 {
     "name": "Copy JIRA ID",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "Copies JIRA ID.",
     "manifest_version" : 2,
     "content_scripts":[{
         "matches": ["http://*.atlassian.net/browse/*",
              "https://*.atlassian.net/browse/*",
              "https://*.jira.com/browse/*",
-             "https://*.atlassian.com/browse/*" ],
+             "https://*.atlassian.com/browse/*",
+             "*://*/browse/*" ],
         "js": ["contentScript.js"],
         "css": ["styles.css"],
         "run_at": "document_end"

@@ -13,7 +13,11 @@ function copyStringToClipboard(str) {
 }
 
 function isJira() {
-    return document.getElementsByTagName("body")[0].getAttribute("id") === 'jira'
+    const body = document.body;
+    if (body && (body.getAttribute('id') === 'jira' || body.getAttribute('id') === 'jira-frontend')) {
+        return true;
+    }
+    return document.querySelector('meta[name="application-name"][content="Jira"]') !== null;
 }
 
 function debounce(func, wait) {

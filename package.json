@@ -1,0 +1,18 @@
+{
+  "name": "copy-jira-id",
+  "version": "1.0.0",
+  "description": "Chrome Extension - Adds a one click copy button to copy a Jira issue key. Works with Jira Cloud and self‑hosted installations. ![snapshot](https://i.ibb.co/0mX0tbK/Screenshot-2019-11-07-at-11-59-12-PM.png)",
+  "main": "contentScript.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "jest": "^30.0.3",
+    "jsdom": "^26.1.0"
+  }
+}
