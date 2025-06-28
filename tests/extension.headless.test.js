@@ -1,5 +1,6 @@
 const path = require('path');
 const http = require('http');
+const fs = require('fs');
 const puppeteer = require('puppeteer-core');
 
 function startServer(html) {
@@ -14,7 +15,11 @@ function startServer(html) {
 
 jest.setTimeout(30000);
 
-describe('extension in headless chrome', () => {
+const CHROME_PATH = '/usr/bin/chromium-browser';
+const hasChrome = fs.existsSync(CHROME_PATH);
+const describeOrSkip = hasChrome ? describe : describe.skip;
+
+describeOrSkip('extension in headless chrome', () => {
   let browser;
   let server;
   beforeAll(async () => {
@@ -25,7 +30,7 @@ describe('extension in headless chrome', () => {
     const extensionPath = path.join(__dirname, '..');
     browser = await puppeteer.launch({
       headless: 'new',
-      executablePath: '/usr/bin/chromium-browser',
+      executablePath: CHROME_PATH,
       args: [
         `--disable-extensions-except=${extensionPath}`,
         `--load-extension=${extensionPath}`,
@@ -36,8 +41,12 @@ describe('extension in headless chrome', () => {
   });
 
   afterAll(async () => {
-    await browser.close();
-    server.close();
+    if (browser) {
+      await browser.close();
+    }
+    if (server) {
+      server.close();
+    }
   });
 
   test('button appears on test page', async () => {
